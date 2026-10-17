@@ -36,6 +36,9 @@ const MainPage = React.lazy(
 const ModelPage = React.lazy(
    () => import("./components/pages/ModelPage/ModelPage"),
 );
+const ModelBuilderPage = React.lazy(
+   () => import("./components/pages/ModelBuilderPage/ModelBuilderPage"),
+);
 const PackagePage = React.lazy(
    () => import("./components/pages/PackagePage/PackagePage"),
 );
@@ -104,6 +107,12 @@ export const createMalloyRouter = (
             {
                path: ":environmentName/:packageName",
                element: <PackagePage />,
+            },
+            {
+               // A literal segment outranks the catch-all below, so this is
+               // not read as a model named "new-model".
+               path: ":environmentName/:packageName/new-model",
+               element: <ModelBuilderPage />,
             },
             {
                path: ":environmentName/:packageName/*",

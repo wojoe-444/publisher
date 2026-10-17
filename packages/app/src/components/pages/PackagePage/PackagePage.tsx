@@ -53,6 +53,9 @@ function PackagePage() {
             }
             resourceUri={resourceUri}
             onEvent={onEvent}
+            onNewModel={() =>
+               navigate(`/${environmentName}/${packageName}/new-model`)
+            }
          />
       );
    }
