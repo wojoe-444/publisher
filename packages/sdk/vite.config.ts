@@ -26,6 +26,8 @@ export default ({ mode }) => {
                // The dashboard builder, and with it the Malloy parser: its own
                // entry so a host loads it only when someone opens the builder.
                "builder/index": "./src/builder-entry.ts",
+               // The model builder and its node-graph canvas, loaded on demand.
+               "model-builder/index": "./src/model-builder-entry.ts",
                // Dependency-free text helpers, for a host that cannot load the main entry.
                "text/index": "./src/text-entry.ts",
             },
@@ -37,6 +39,8 @@ export default ({ mode }) => {
                   return `client/index.${format}.js`;
                } else if (entryName === "builder/index") {
                   return `builder/index.${format}.js`;
+               } else if (entryName === "model-builder/index") {
+                  return `model-builder/index.${format}.js`;
                } else if (entryName === "text/index") {
                   return `text/index.${format}.js`;
                }

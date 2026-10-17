@@ -46,6 +46,7 @@ import {
    setVersionIdError,
    wildcardParam,
 } from "./json_route";
+import { modelWriteRoute } from "./model_write";
 import { reportWriteRoute } from "./report_write";
 
 export interface ApiControllers {
@@ -607,6 +608,11 @@ function registerPackageRoutes(
       // the package would pile up behind a save holding the mutex.
       queryConcurrency(),
       reportWriteRoute(reportController),
+   );
+   app.put(
+      `${pkg}/model-files/*`,
+      queryConcurrency(),
+      modelWriteRoute(modelController),
    );
    app.get(
       `${pkg}/reports`,

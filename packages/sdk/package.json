@@ -11,6 +11,9 @@
          "builder": [
             "dist/builder-entry.d.ts"
          ],
+         "model-builder": [
+            "dist/model-builder-entry.d.ts"
+         ],
          "client": [
             "dist/client-entry.d.ts"
          ],
@@ -40,6 +43,12 @@
          "import": "./dist/builder/index.es.js",
          "require": "./dist/builder/index.cjs.js",
          "default": "./dist/builder/index.es.js"
+      },
+      "./model-builder": {
+         "types": "./dist/model-builder-entry.d.ts",
+         "import": "./dist/model-builder/index.es.js",
+         "require": "./dist/model-builder/index.cjs.js",
+         "default": "./dist/model-builder/index.es.js"
       },
       "./text": {
          "types": "./dist/text-entry.d.ts",
@@ -108,6 +117,7 @@
       "@emotion/react": "^11.14.0",
       "@emotion/styled": "^11.14.0",
       "@react-spring/web": "^10.0.1",
+      "@xyflow/react": "^12.12.0",
       "cron-parser": "^5.6.2",
       "cronstrue": "^2.50.0",
       "dayjs": "^1.11.13",

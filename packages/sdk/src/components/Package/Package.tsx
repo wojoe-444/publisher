@@ -93,6 +93,12 @@ interface PackageProps {
    resourceUri: string;
    /** What the New report dialog creates, or why it could not; see `ReportEvent`. */
    onEvent?: ReportEventHandler;
+   /**
+    * Open the model builder for this package. Where it lives is the host's
+    * business, so the "+ Model" button shows only when a host supplies this
+    * and the package takes writes.
+    */
+   onNewModel?: () => void;
 }
 
 export default function Package({
@@ -100,6 +106,7 @@ export default function Package({
    onOpenDocument,
    resourceUri,
    onEvent,
+   onNewModel,
 }: PackageProps) {
    const { apiClients, server, mutable } = useServer();
    const queryClient = useQueryClient();
@@ -273,6 +280,9 @@ export default function Package({
    const canCreate = route !== undefined && listingsSettled;
    // The editors step aside on a narrow screen, so no entry point to one is offered there.
    const canNew = canCreate && !narrow;
+   // A model is written into the package itself, so only where reports are.
+   const canNewModel =
+      onNewModel !== undefined && route === "package" && !narrow;
    const createTarget = useMemo((): CreateTarget | undefined => {
       if (!canCreate) return undefined;
       const existing = [
@@ -607,7 +617,17 @@ export default function Package({
                   </PackageSection>
                )}
 
-               <PackageSection title="Models" count={models.length}>
+               <PackageSection
+                  title="Models"
+                  count={models.length}
+                  {...(canNewModel
+                     ? {
+                          action: (
+                             <AddButton label="Model" onClick={onNewModel} />
+                          ),
+                       }
+                     : {})}
+               >
                   {models.map((model) => (
                      <PackageItemRow
                         key={model.path}

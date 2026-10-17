@@ -29,6 +29,11 @@ export default ({ mode }) => {
          "@malloy-publisher/sdk/builder": isDev
             ? path.resolve(__dirname, "../sdk/src/builder-entry.ts")
             : path.resolve(__dirname, "../sdk/dist/builder/index.es.js"),
+         // The model builder's own entry, for the same reason: its node-graph
+         // canvas loads only when someone opens the builder.
+         "@malloy-publisher/sdk/model-builder": isDev
+            ? path.resolve(__dirname, "../sdk/src/model-builder-entry.ts")
+            : path.resolve(__dirname, "../sdk/dist/model-builder/index.es.js"),
          // Client subpath must come BEFORE the general SDK alias
          "@malloy-publisher/sdk/client": isDev
             ? path.resolve(__dirname, "../sdk/src/client-entry.ts")
